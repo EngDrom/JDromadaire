@@ -1,7 +1,6 @@
 # JDromadaire
 
-
-The goal of this tool is to create a language which uses the great points of python but uses the the Java/C++/C syntax and which uses the tools of Java like the Socket which is easier than python's one.
+The goal of this language is to create a bunch of tools to work with the EngDrom project and to develop a turing complete language.
 
 ## License
 
