@@ -1,9 +1,5 @@
 package org.EngDrom.JDrom.parser;
 
-import java.util.ArrayList;
-
-import org.EngDrom.JDrom.lexer.Token;
-import org.EngDrom.JDrom.parser.config.ParserCursor;
 import org.EngDrom.JDrom.parser.grammar.ParserRule;
 import org.EngDrom.JDrom.parser.grammar.RuleCompiler;
 import org.EngDrom.JDrom.types.specials.ForNode;

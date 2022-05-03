@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 
 import org.EngDrom.JDrom.lexer.Token;
-import org.EngDrom.JDrom.types.Node;
 
 public class ParserCursor {
 
@@ -31,8 +30,8 @@ public class ParserCursor {
 		if (!found)
 			this.restore();
 		else {
-			int idx = this.saves.removeLast();
-			int arg_save = this.args_saves.removeLast();
+			this.saves.removeLast();
+			this.args_saves.removeLast();
 		}
 	}
 

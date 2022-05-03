@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import org.EngDrom.JDrom.lexer.Lexer;
 import org.EngDrom.JDrom.lexer.Token;
 import org.EngDrom.JDrom.lexer.TokenType;
+import org.EngDrom.JDrom.parser.config.ImproperlyConfiguredExpression;
+import org.EngDrom.JDrom.parser.grammar.rules.BlockRule;
 import org.EngDrom.JDrom.parser.grammar.rules.ExpressionRule;
 import org.EngDrom.JDrom.parser.grammar.rules.ListRule;
 import org.EngDrom.JDrom.parser.grammar.rules.ManyRule;
@@ -90,6 +92,14 @@ public class RuleCompiler {
 			ParserRule left = rules.get(rules.size() - 1);
 			tok_idx += 1;
 			rules.set(rules.size() - 1, new ManyRule(left, -1, false));
+		}
+
+		if (tokens.get(tok_idx).type == TokenType.LCURLYBRACKET) {
+			tok_idx += 1;
+			if (tokens.get(tok_idx).type != TokenType.RCURLYBRACKET)
+				throw new ImproperlyConfiguredExpression("Expected '}' after '{' in rule compilation");
+		
+			return new BlockRule();
 		}
 		
 		return null;

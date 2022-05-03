@@ -14,6 +14,12 @@ import org.EngDrom.JDrom.types.std.IntNode;
 class InnerExpressionException extends RuntimeException { }
 
 public class ExpressionRule extends ParserRule {
+	/**
+	 * DO NOT REMOVE
+	 * 
+	 * It is used to lock the methods in place for the java compiler otherwise it removes them
+	 * @throws Exception
+	 */
 	private void lock_methods() throws Exception {
 		multiplication();
 		boolean_operators();

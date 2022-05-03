@@ -22,7 +22,7 @@ public class OrRule extends ParserRule {
 			return n0;
 		
 		cursor.restore();
-		int i = 0;
+		
 		return this.right.parse(cursor);
 	}
 
