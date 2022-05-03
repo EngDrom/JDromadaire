@@ -32,6 +32,8 @@ public class ManyRule extends ParserRule {
 				}
 				break;
 			}
+
+			idx ++;
 		}
 		
 		cursor.free(true);
