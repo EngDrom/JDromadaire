@@ -36,7 +36,7 @@ public class RuleCompiler {
 		ArrayList<ParserRule> rules = new ArrayList<ParserRule>();
 		
 		while (tok_idx < tokens.size()) {
-			if (tokens.get(tok_idx).type == TokenType.RPAREN)
+			if (tokens.get(tok_idx).type == TokenType.RPAREN || tokens.get(tok_idx).type == TokenType.RHOOK)
 				break;
 			
 			ParserRule rule = factor(rules);
