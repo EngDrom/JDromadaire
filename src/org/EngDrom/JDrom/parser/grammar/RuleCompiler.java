@@ -90,7 +90,6 @@ public class RuleCompiler {
 		}
 		if (tokens.get(tok_idx).type == TokenType.TIMES) {
 			ParserRule left = rules.get(rules.size() - 1);
-			tok_idx += 1;
 			rules.set(rules.size() - 1, new ManyRule(left, -1, false));
 		}
 
