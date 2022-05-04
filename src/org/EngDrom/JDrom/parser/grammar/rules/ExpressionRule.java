@@ -10,6 +10,7 @@ import org.EngDrom.JDrom.types.Node;
 import org.EngDrom.JDrom.types.specials.GetNode;
 import org.EngDrom.JDrom.types.specials.IdentityNode;
 import org.EngDrom.JDrom.types.specials.OperatorNode;
+import org.EngDrom.JDrom.types.specials.SetNode;
 import org.EngDrom.JDrom.types.std.IntNode;
 
 class InnerExpressionException extends RuntimeException { }
@@ -113,6 +114,14 @@ public class ExpressionRule extends ParserRule {
 		if (tok.type == TokenType.NUMBER) {
 			return new IntNode(tok.value);
 		} else if (tok.type == TokenType.NAME) {
+			if (this.cursor.get_cur_token().type == TokenType.SET) {
+				this.cursor.tok_idx += 1;
+				return new SetNode(new Object[] {
+					tok.value,
+					this.addition()
+				});
+			}
+
 			return new GetNode(tok.value);
 		}
 		

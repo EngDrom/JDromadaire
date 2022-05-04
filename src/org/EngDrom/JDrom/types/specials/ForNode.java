@@ -36,4 +36,19 @@ public class ForNode extends Node {
 		return null;
 	}
 
+	public String toString() {
+		StringBuffer strbf = new StringBuffer();
+
+		strbf.append("FOR\n  ");
+		strbf.append(initial.toString());
+		strbf.append("\n  ");
+		strbf.append(condition.toString());
+		strbf.append("\n  ");
+		strbf.append(loop.toString());
+		strbf.append("\n");
+		strbf.append(block.toString());
+		
+		return strbf.toString();
+	}
+
 }
