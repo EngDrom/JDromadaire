@@ -12,7 +12,6 @@ public class IntNode extends Node {
 	public IntNode(String str) {
 		this.value = Integer.parseInt(str);
 	}
-	
 	public IntNode(int value) {
 		this.value = value;
 	}
@@ -23,7 +22,36 @@ public class IntNode extends Node {
 
 	@Override
 	public Object evaluate(StackNode context) {
-		return value;
+		return this;
+	}
+
+
+	/**
+	 * Operators
+	 */
+	public Object __add__ (Object other) {
+		if (other instanceof IntNode)
+			return new IntNode(this.value + ((IntNode)other).value);
+
+		return null;
+	}
+	public Object __sub__ (Object other) {
+		if (other instanceof IntNode)
+			return new IntNode(this.value - ((IntNode)other).value);
+
+		return null;
+	}
+	public Object __mul__ (Object other) {
+		if (other instanceof IntNode)
+			return new IntNode(this.value * ((IntNode)other).value);
+
+		return null;
+	}
+	public Object __div__ (Object other) {
+		if (other instanceof IntNode)
+			return new IntNode(this.value / ((IntNode)other).value);
+
+		return null;
 	}
 
 }

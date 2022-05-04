@@ -13,4 +13,17 @@ public abstract class Node {
 		throw new RuntimeException();
 	}
 
+	public Object __add__ (Object other) {
+		return null;
+	}
+	public Object __sub__ (Object other) {
+		return null;
+	}
+	public Object __mul__ (Object other) {
+		return null;
+	}
+	public Object __div__ (Object other) {
+		return null;
+	}
+
 }

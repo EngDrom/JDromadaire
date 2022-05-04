@@ -15,7 +15,9 @@ public class BlockNode extends Node {
 
     @Override
     public Object evaluate(StackNode context) {
-        // TODO implement evaluation of BlockNode
+        for (Node node: nodes) {
+            node.evaluate(context);
+        }
         return null;
     }
 

@@ -22,8 +22,14 @@ public class OperatorNode extends Node {
 
 	@Override
 	public Object evaluate(StackNode context) {
-		Object l = left.evaluate(context);
-		Object r = right.evaluate(context);
+		// Assume it returns a Node
+		Node l = (Node) left.evaluate(context);
+		Node r = (Node) right.evaluate(context);
+
+		if (this.operator == TokenType.PLUS)   return l.__add__(r);
+		if (this.operator == TokenType.MINUS)  return l.__sub__(r);
+		if (this.operator == TokenType.TIMES)  return l.__mul__(r);
+		if (this.operator == TokenType.DIVIDE) return l.__div__(r);
 		
 		return null;
 	}
