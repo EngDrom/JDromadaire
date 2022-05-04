@@ -29,20 +29,36 @@ public class ListRule extends ParserRule {
 			}
 		}
 		
-		cursor.free(true);
 		
 		if (cls != null) {
-			return this.get_linked(cursor);
+			Node data = this.get_linked(cursor);
+			cursor.restore_arguments();
+			cursor.free(true);
+			cursor.addArgument(data);
+			return data;
 		}
+
+		cursor.free(true);
 		return IdentityNode.COMPILER_CONTINUE_NODE;
+	}
+
+	private Constructor<? extends Node> getConstructor () {
+		for (Constructor<?> cstr: cls.getConstructors()) {
+			if (cstr.getParameterTypes().length == 1
+			   && cstr.getParameterTypes()[0].toString().equals("class [Ljava.lang.Object;")) {
+				
+				return (Constructor<? extends Node>) cstr;
+			}
+		}	
+
+		return null;
 	}
 
 	public Node get_linked(ParserCursor cursor) {
 		try {
-			Constructor<? extends Node> method = cls.getConstructor(Object[].class);
-			
-			return method.newInstance(cursor.args());
+			return this.getConstructor().newInstance(new Object[] {cursor.args()});
 		} catch (Exception e) {
+			e.printStackTrace();
 			System.out.println("Could not find constructor for parser");
 			return null;
 		}

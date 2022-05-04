@@ -14,7 +14,8 @@ public class ParserCursor {
 	private LinkedList<Integer> args_saves = new LinkedList<Integer>();
 	
 	public Object[] args() {
-		return arguments.toArray();
+		if (args_saves.size() == 0) return arguments.toArray();
+		return arguments.subList(args_saves.getLast(), arguments.size()).toArray();
 	}
 	
 	public ParserCursor (ArrayList<Token> types) {
@@ -44,12 +45,14 @@ public class ParserCursor {
 			tok_idx = 0;
 		} else {
 			tok_idx = this.saves.getLast();
+			this.saves.removeLast();
 		}
 		
 		if (this.arguments.size() == 0) {
 			this.arguments.clear();
 		} else {
 			int rst = this.args_saves.getLast();
+			this.args_saves.removeLast();
 			while (rst < this.arguments.size()) {
 				this.arguments.removeLast();
 			}
@@ -60,4 +63,15 @@ public class ParserCursor {
 		this.arguments.add(obj);
 	}
 	
+	public int token_count() {
+		return this.tokens.size();
+	}
+
+    public void restore_arguments() {
+		int rst = this.args_saves.getLast();
+		while (rst < this.arguments.size()) {
+			this.arguments.removeLast();
+		}
+    }
+
 }
