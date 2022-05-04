@@ -31,7 +31,7 @@ public class Tuple {
 	}
 	
 	public Object get(Class<?> cls_expected, int idx) {
-		if (cls_expected != classes[idx])
+		if (!cls_expected.isAssignableFrom(classes[idx]))
 			throw new TupleClassException(classes[idx], cls_expected);
 		
 		return objects[idx];

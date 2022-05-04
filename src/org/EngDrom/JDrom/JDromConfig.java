@@ -24,7 +24,7 @@ public class JDromConfig {
 	public static final String VERSION = RELEASE_TYPE + '.' + MAJOR + '.' + MINOR + '.' + SUBVERSION;
 	
 	public static void main(String[] args) {
-		Lexer l0 = new Lexer(" x = 1; x = x + 1 ");
+		Lexer l0 = new Lexer(" x = 1; x = x + 1; if (x + 1) { x + 1; __last__ + 2 } else if (x + 1) { x + 1 } else { x + 2 } ");
 		l0.build();
 		BlockRule rule0 = new BlockRule();
 		ParserCursor cursor = new ParserCursor(l0.tokens);

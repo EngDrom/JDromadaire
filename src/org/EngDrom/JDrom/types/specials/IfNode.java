@@ -39,4 +39,23 @@ public class IfNode extends Node {
 		return null;
 	}
 
+	public String toString() {
+		StringBuffer strbf = new StringBuffer();
+		for (int i = 0; i < tuples.size(); i++) {
+			strbf.append(i == 0 ? "IF " : "ELSE IF ");
+			strbf.append(tuples.get(i).get(Node.class, 0).toString());
+			strbf.append("\n");
+			strbf.append(tuples.get(i).get(Node.class, 1).toString());
+			strbf.append("\n");
+		}
+
+		if (else_statement != null) {
+			strbf.append("ELSE\n");
+			strbf.append(else_statement.toString());
+			strbf.append("\n");
+		}
+		strbf.setLength(strbf.length() == 0 ? 0 : strbf.length() - 1);
+		return strbf.toString();
+	}
+
 }
