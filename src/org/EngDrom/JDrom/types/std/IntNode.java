@@ -22,7 +22,7 @@ public class IntNode extends Node {
 	}
 
 	@Override
-	public Object evaluate() {
+	public Object evaluate(StackNode context) {
 		return value;
 	}
 

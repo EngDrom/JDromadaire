@@ -2,6 +2,7 @@ package org.EngDrom.JDrom.types.specials;
 
 import org.EngDrom.JDrom.lexer.TokenType;
 import org.EngDrom.JDrom.types.Node;
+import org.EngDrom.JDrom.types.std.StackNode;
 
 public class OperatorNode extends Node {
 
@@ -20,9 +21,9 @@ public class OperatorNode extends Node {
 	}
 
 	@Override
-	public Object evaluate() {
-		Object l = left.evaluate();
-		Object r = right.evaluate();
+	public Object evaluate(StackNode context) {
+		Object l = left.evaluate(context);
+		Object r = right.evaluate(context);
 		
 		return null;
 	}

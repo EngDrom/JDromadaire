@@ -1,6 +1,7 @@
 package org.EngDrom.JDrom.types.specials;
 
 import org.EngDrom.JDrom.types.Node;
+import org.EngDrom.JDrom.types.std.StackNode;
 
 public class ForNode extends Node {
 	
@@ -18,16 +19,18 @@ public class ForNode extends Node {
 	}
 	
 	@Override
-	public Object evaluate() {
-		initial.evaluate();
+	public Object evaluate(StackNode context) {
+		initial.evaluate(context);
 		
-		Object o = condition.evaluate();
+		Object o = condition.evaluate(context);
 		while ( (boolean) (o instanceof Boolean ? o : o != null) ) {
-			Object n0 = loop.evaluate();
+			block.evaluate(context);
+
+			Object n0 = loop.evaluate(context);
 			
 			// TODO break returns and continues
 			
-			o = condition.evaluate();
+			o = condition.evaluate(context);
 		}
 		
 		return null;

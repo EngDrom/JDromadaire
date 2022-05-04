@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import org.EngDrom.JDrom.types.Node;
 import org.EngDrom.JDrom.utils.tuples.Tuple;
+import org.EngDrom.JDrom.types.std.StackNode;
 
 public class IfNode extends Node {
 	
@@ -22,19 +23,19 @@ public class IfNode extends Node {
 	}
 
 	@Override
-	public Object evaluate() {
+	public Object evaluate(StackNode context) {
 		for (Tuple tuple:tuples) {
 			Node expr  = (Node) tuple.get(Node.class, 0);
 			Node block = (Node) tuple.get(Node.class, 1);
 			
-			boolean result = (boolean) expr.evaluate();
+			boolean result = (boolean) expr.evaluate(context);
 			if (result) {
-				return block.evaluate();
+				return block.evaluate(context);
 			}
 		}
 		
 		if (else_statement != null)
-			return else_statement.evaluate();
+			return else_statement.evaluate(context);
 		return null;
 	}
 

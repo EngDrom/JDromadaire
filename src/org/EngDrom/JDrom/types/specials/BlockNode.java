@@ -3,6 +3,7 @@ package org.EngDrom.JDrom.types.specials;
 import java.util.ArrayList;
 
 import org.EngDrom.JDrom.types.Node;
+import org.EngDrom.JDrom.types.std.StackNode;
 
 public class BlockNode extends Node {
 
@@ -11,7 +12,7 @@ public class BlockNode extends Node {
     }
 
     @Override
-    public Object evaluate() {
+    public Object evaluate(StackNode context) {
         // TODO implement evaluation of BlockNode
         return null;
     }

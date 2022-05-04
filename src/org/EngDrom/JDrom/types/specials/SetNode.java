@@ -1,6 +1,7 @@
 package org.EngDrom.JDrom.types.specials;
 
 import org.EngDrom.JDrom.types.Node;
+import org.EngDrom.JDrom.types.std.StackNode;
 
 public class SetNode extends Node {
 	
@@ -17,8 +18,8 @@ public class SetNode extends Node {
 	}
 
 	@Override
-	public Object evaluate() {
-		Object o = expr.evaluate();
+	public Object evaluate(StackNode context) {
+		Object o = expr.evaluate(context);
 		// TODO save data
 		
 		return o;
