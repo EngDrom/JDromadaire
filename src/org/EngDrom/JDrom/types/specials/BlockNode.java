@@ -7,14 +7,31 @@ import org.EngDrom.JDrom.types.std.StackNode;
 
 public class BlockNode extends Node {
 
-    public BlockNode(ArrayList<Node> nodes) {
+    private ArrayList<Node> nodes;
 
+    public BlockNode(ArrayList<Node> nodes) {
+        this.nodes = nodes;
     }
 
     @Override
     public Object evaluate(StackNode context) {
         // TODO implement evaluation of BlockNode
         return null;
+    }
+
+    public String toString() {
+        StringBuffer strbf = new StringBuffer();
+
+        strbf.append("BLOCK\n");
+        for (Node node:this.nodes) {
+            strbf.append(node.toString());
+            strbf.append("\n");
+        }
+        strbf.setLength(strbf.length() == 0 ? 0 : strbf.length() - 1);
+
+        String str = strbf.toString();
+
+        return str.replaceAll("\n", "\n  ");
     }
     
 }

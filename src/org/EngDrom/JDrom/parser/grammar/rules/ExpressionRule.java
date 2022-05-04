@@ -7,6 +7,7 @@ import org.EngDrom.JDrom.lexer.TokenType;
 import org.EngDrom.JDrom.parser.config.ParserCursor;
 import org.EngDrom.JDrom.parser.grammar.ParserRule;
 import org.EngDrom.JDrom.types.Node;
+import org.EngDrom.JDrom.types.specials.GetNode;
 import org.EngDrom.JDrom.types.specials.IdentityNode;
 import org.EngDrom.JDrom.types.specials.OperatorNode;
 import org.EngDrom.JDrom.types.std.IntNode;
@@ -111,6 +112,8 @@ public class ExpressionRule extends ParserRule {
 		
 		if (tok.type == TokenType.NUMBER) {
 			return new IntNode(tok.value);
+		} else if (tok.type == TokenType.NAME) {
+			return new GetNode(tok.value);
 		}
 		
 		throw new InnerExpressionException();

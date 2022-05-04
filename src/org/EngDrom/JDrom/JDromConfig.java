@@ -4,6 +4,7 @@ import org.EngDrom.JDrom.lexer.Lexer;
 import org.EngDrom.JDrom.parser.ParserConfig;
 import org.EngDrom.JDrom.parser.config.ParserCursor;
 import org.EngDrom.JDrom.parser.grammar.ParserRule;
+import org.EngDrom.JDrom.parser.grammar.rules.BlockRule;
 import org.EngDrom.JDrom.parser.grammar.rules.ListRule;
 import org.EngDrom.JDrom.types.Node;
 import org.EngDrom.JDrom.types.specials.IdentityNode;
@@ -23,14 +24,13 @@ public class JDromConfig {
 	public static final String VERSION = RELEASE_TYPE + '.' + MAJOR + '.' + MINOR + '.' + SUBVERSION;
 	
 	public static void main(String[] args) {
-		Lexer l0 = new Lexer(" function f(x, y) { 1 + 1 } ");
+		Lexer l0 = new Lexer(" x = 1; x = x + 1 ");
 		l0.build();
-		ParserRule rule0 = ParserRule.compile("/FUNCTION/ //NAME/ /LPAREN/ [//NAME/ [/COMMA/ //NAME/]*] /RPAREN/ {}");
+		BlockRule rule0 = new BlockRule();
 		ParserCursor cursor = new ParserCursor(l0.tokens);
-		Node result = rule0.parse(cursor);
-		for (Object o : cursor.args()) {
-			System.out.println(o);
-		}
+		rule0.parse(cursor, false);
+		Node result = (Node) cursor.args()[0];
+		System.out.println(result);
 	}
 	
 }

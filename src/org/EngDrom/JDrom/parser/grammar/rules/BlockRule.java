@@ -18,9 +18,15 @@ public class BlockRule extends ParserRule {
 
     @Override
     public Node parse(ParserCursor cursor) {
-        if (cursor.get_cur_token().type != TokenType.LCURLYBRACKET)
-            return IdentityNode.COMPILER_ERR_NODE;
-        cursor.tok_idx += 1;
+        return this.parse(cursor, true);
+    }
+    
+    public Node parse(ParserCursor cursor, boolean bracketBased) {
+        if (bracketBased) {
+            if (cursor.get_cur_token().type != TokenType.LCURLYBRACKET)
+                return IdentityNode.COMPILER_ERR_NODE;
+            cursor.tok_idx += 1;
+        }
 
         ArrayList<Node> nodes = new ArrayList<Node>();
 
@@ -59,13 +65,19 @@ public class BlockRule extends ParserRule {
                 cursor.restore();
                 return IdentityNode.COMPILER_ERR_NODE;
             }
+            if ((!bracketBased) && cursor.get_cur_token().type == TokenType.RCURLYBRACKET) {
+                cursor.restore();
+                return IdentityNode.COMPILER_ERR_NODE;
+            }
         }
 
-        if (cursor.get_cur_token().type != TokenType.RCURLYBRACKET) {
-            cursor.restore();
-            return IdentityNode.COMPILER_ERR_NODE;
+        if (bracketBased) {
+            if (cursor.get_cur_token().type != TokenType.RCURLYBRACKET) {
+                cursor.restore();
+                return IdentityNode.COMPILER_ERR_NODE;
+            }
+            cursor.tok_idx += 1;
         }
-        cursor.tok_idx += 1;
 
         cursor.restore_arguments();
         cursor.free(true);

@@ -20,9 +20,13 @@ public class SetNode extends Node {
 	@Override
 	public Object evaluate(StackNode context) {
 		Object o = expr.evaluate(context);
-		// TODO save data
+		context.setitem(this.name, o);
 		
 		return o;
+	}
+
+	public String toString() {
+		return this.name + " = " + this.expr.toString();
 	}
 
 }
