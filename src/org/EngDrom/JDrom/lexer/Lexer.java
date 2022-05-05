@@ -3,6 +3,7 @@ package org.EngDrom.JDrom.lexer;
 import java.util.ArrayList;
 
 import org.EngDrom.JDrom.exceptions.lexer.CharacterException;
+import org.EngDrom.JDrom.types.std.StringNode;
 import org.EngDrom.JDrom.utils.tuples.Tuple;
 
 /**
@@ -99,6 +100,8 @@ public class Lexer {
 				
 			} else if ((new_token = this.lex_name()) != null) {
 				
+			} else if ((new_token = this.lex_string()) != null) {
+				
 			} else if ((new_token = this.lex_operator()) != null) {
 				
 			} else if (!LexerConfig.IGNORE_CHARS.contains(String.valueOf(this.chr))) {
@@ -189,6 +192,27 @@ public class Lexer {
 	}
 	private Token lex_number() {
 		return this.lex_by_string(LexerConfig.NUMBER_CHARS, TokenType.NUMBER);
+	}
+	private Token lex_string() {
+		if (!(this.advanced && (this.chr == '\"' || this.chr == '\'')))
+			return null;
+		char end_chr = this.chr;
+		int start    = this.idx + 1;
+		int scol = col;
+		int slin = line;
+		int sprog = prog_idx;
+		this.advance();
+
+		while (this.advanced && this.chr != end_chr) {
+			if (this.chr == '\\') this.advance();
+			this.advance();
+		}
+
+		if (!(this.advanced && this.chr == end_chr))
+			throw new CharacterException(start, scol, slin, sprog);
+		
+		return new Token(TokenType.STRING, this.str.substring(start, this.idx))
+			.setPosition(start, scol, slin, sprog);
 	}
 
 }

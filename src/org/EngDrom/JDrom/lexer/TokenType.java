@@ -7,7 +7,7 @@ package org.EngDrom.JDrom.lexer;
 
 public enum TokenType {
 	// Defautl Types
-	NUMBER, NAME,
+	NUMBER, NAME, STRING,
 
 	// Default Tokens
 	SET, 
