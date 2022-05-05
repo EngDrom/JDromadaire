@@ -7,6 +7,7 @@ import org.EngDrom.JDrom.types.Node;
 public class StackNode extends Node {
 
     private HashMap<String, Object> stored = new HashMap<>();
+    private HashMap<String, Object> heaped = new HashMap<>();
 
     public StackNode parent = null;
     public StackNode () { super(); }
@@ -24,6 +25,7 @@ public class StackNode extends Node {
         if (key instanceof String) {
             String str = (String)key;
 
+            if (this.heaped.containsKey(str)) return this.heaped.get(str);
             return this.stored.get(str);
         } 
 
@@ -33,7 +35,9 @@ public class StackNode extends Node {
     public void setitem (Object key, Object value) {
         if (key instanceof String) {
             String str = (String) key;
-            this.stored.put(str, value);
+
+            if (this.heaped.containsKey(str)) this.heaped.put(str, value);
+            else this.stored.put(str, value);
         }
     }
     
